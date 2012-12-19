@@ -4,7 +4,7 @@ describe('Set(initial)', function() {
         // should add any value except undefined, iterables are taken apart
         var o = {test: 'yes'};
         var s1 = new Set([1, 2, 3], 4, true, false, null, o, undefined);
-        expect(s1.size()).toBe(8);
+        expect(s1.length()).toBe(8);
 
         // should work with another set, since it's an iterable
         var s2 = new Set(1, s1);
@@ -14,20 +14,20 @@ describe('Set(initial)', function() {
     });
 });
 
-describe('Set.prototype.size()', function() {
+describe('Set.prototype.length()', function() {
     it('should return the cardinality of the set', function() {
 
-        // should return the size
+        // should return the length
         var s1 = new Set([1, 2, 3], {test: 'yes'});
         var s2 = new Set();
-        expect(s1.size()).toBe(4);
-        expect(s2.size()).toBe(0);
+        expect(s1.length()).toBe(4);
+        expect(s2.length()).toBe(0);
 
         // make sure duplicates are not added
         var s1 = new Set([1, 2, 3], {test: 'yes'}, 3, 2, 1);
         var s2 = new Set();
-        expect(s1.size()).toBe(4);
-        expect(s2.size()).toBe(0);
+        expect(s1.length()).toBe(4);
+        expect(s2.length()).toBe(0);
 
     });
 });
@@ -55,7 +55,7 @@ describe('Set.prototype.add(value)', function() {
         // test adding different types
         var s1 = new Set();
         s1.add(3);
-        expect(s1.size()).toBe(1);
+        expect(s1.length()).toBe(1);
         expect(s1.equals(3)).toBe(true);
         s1.add([1, 2, 3]); // add array as-is
         expect(s1.equals([1, 2, 3])).toBe(false);
@@ -132,14 +132,14 @@ describe('Set.prototype.update(other)', function() {
         var s1 = new Set([1, 2, 3]);
         s1.update([1, 2, 3, 4, 5, 6]);
         expect(s1.equals([1, 2, 3, 4, 5, 6])).toBe(true);
-        expect(s1.size()).toBe(6);
+        expect(s1.length()).toBe(6);
 
         // test sets
         var s1 = new Set([1, 2, 3]);
         var s2 = new Set([4, 5, 6]);
         s1.update(s2);
         expect(s1.equals([1, 2, 3, 4, 5, 6])).toBe(true);
-        expect(s1.size()).toBe(6);
+        expect(s1.length()).toBe(6);
 
         // test primatives
         var s1 = new Set([1, 2, 3]);
@@ -177,7 +177,7 @@ describe('Set.prototype.clear()', function() {
         var s1 = new Set([1, 2, 3]);
         var s2 = new Set();
         s1.clear();
-        expect(s1.size()).toBe(0);
+        expect(s1.length()).toBe(0);
         expect(s1.equals(s2)).toBe(true);
 
     });
@@ -381,7 +381,7 @@ describe('Set.prototype.toArray()', function() {
         var s1 = new Set([1, 2, 3]);
         var s2 = new Set();
         expect(s1.toArray()).toBeAnArray();
-        expect(s1.toArray().length).toBe(s1.size());
+        expect(s1.toArray().length).toBe(s1.length());
         expect(s1.toArray()[1]).toBe(2);
         expect(s2.toArray()).toBeAnArray();
         expect(s2.toArray().length).toBe(0);

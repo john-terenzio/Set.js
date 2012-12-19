@@ -23,12 +23,12 @@
 
     Set = function(/* values */) {
         this._members = {};
-        this._size = 0;
+        this._length = 0;
         this.update.apply(this, arguments);
     };
 
-    Set.prototype.size = function() {
-        return this._size;
+    Set.prototype.length = function() {
+        return this._length;
     };
 
     Set.prototype.contains = function(value) {
@@ -40,7 +40,7 @@
             var hash = getHash(value);
             if (!this._members.hasOwnProperty(hash)) {
                 this._members[hash] = value;
-                ++this._size;
+                ++this._length;
             }
         }
         return this;
@@ -51,7 +51,7 @@
             var hash = getHash(value);
             if (this._members.hasOwnProperty(hash)) {
                 delete this._members[hash];
-                --this._size;
+                --this._length;
             }
         }
         return this;
@@ -59,7 +59,7 @@
 
     Set.prototype.clear = function() {
         this._members = {};
-        this._size = 0;
+        this._length = 0;
         return this;
     };
 
@@ -68,7 +68,7 @@
         for (i in this._members) {
             if (this._members.hasOwnProperty(i)) {
                 copy._members[i] = this._members[i];
-                ++copy._size;
+                ++copy._length;
             }
         }
         return copy;
@@ -81,7 +81,7 @@
                 for (j in arguments[i]._members) {
                     if (arguments[i]._members.hasOwnProperty(j) && !this._members.hasOwnProperty(j)) {
                         this._members[j] = arguments[i]._members[j]
-                        ++this._size;
+                        ++this._length;
                     }
                 }
             } else if (Object.prototype.toString.call(arguments[i]) === '[object Array]') {
@@ -100,7 +100,7 @@
         if (!(other instanceof Set)) {
             other = new Set(other);
         }
-        if (this._size !== other._size) {
+        if (this._length !== other._length) {
             return false;
         }
         for (i in this._members) {
@@ -119,7 +119,7 @@
         for (i in other._members) {
             if (other._members.hasOwnProperty(i) && !union._members.hasOwnProperty(i)) {
                 union._members[i] = other._members[i];
-                ++union._size;
+                ++union._length;
             }
         }
         return union;
@@ -133,7 +133,7 @@
         for (i in this._members) {
             if (this._members.hasOwnProperty(i) && other._members.hasOwnProperty(i)) {
                 intersection._members[i] = this._members[i];
-                ++intersection._size;
+                ++intersection._length;
             }
         }
         return intersection;
@@ -147,7 +147,7 @@
         for (i in this._members) {
             if (this._members.hasOwnProperty(i) && !other._members.hasOwnProperty(i)) {
                 difference._members[i] = this._members[i];
-                ++difference._size;
+                ++difference._length;
             }
         }
         return difference;
@@ -161,7 +161,7 @@
         for (i in other._members) {
             if (!this._members.hasOwnProperty(i) && other._members.hasOwnProperty(i)) {
                 complement._members[i] = other._members[i];
-                ++complement._size;
+                ++complement._length;
             }
         }
         return complement;
@@ -175,27 +175,27 @@
     };
 
     Set.prototype.isEmpty = function() {
-        return this._size === 0;
+        return this._length === 0;
     };
 
     Set.prototype.isDisjoint = function(other) {
-        return this.intersection(other)._size === 0;
+        return this.intersection(other)._length === 0;
     };
 
     Set.prototype.isSubset = function(other) {
-        return this.union(other)._size === other._size;
+        return this.union(other)._length === other._length;
     };
 
     Set.prototype.isProperSubset = function(other) {
-        return this._size < other._size && this.isSubset(other);
+        return this._length < other._length && this.isSubset(other);
     };
 
     Set.prototype.isSuperset = function(other) {
-        return this._size === this.union(other)._size;
+        return this._length === this.union(other)._length;
     };
 
     Set.prototype.isProperSuperset = function(other) {
-        return other._size < this._size && this.isSuperset(other);
+        return other._length < this._length && this.isSuperset(other);
     };
 
     Set.prototype.forEach = function(fn, context) {
