@@ -16,14 +16,14 @@ Set.js uses native JavaScript objects to store data. Since these are true
 hash tables, performance is close to what you would expect from a native
 implemenation. For example, testing membership is constant time.
 
-In addition to primatives, Set.js supports adding objects to sets. Like always,
-objects are treated as reference values, so if an object is in two sets, each
-set is really holding a reference to the same object. One thing to note
-regarding this is that objects are "scribbled on" when being added to a set. A
-property called `"_hash"` is added to the object and contains an int serving as
-a unique identifier for that object. This was done in lieu of implementing a
-full on hash function for objects, which is non-trivial and would most likely
-impact performance.
+In addition to primatives (except `undefined`), Set.js supports adding objects
+to sets. Like always, objects are treated as reference values, so if an object
+is in two sets, each set is really holding a reference to the same object. One
+thing to note regarding this is that objects are "scribbled on" when being
+added to a set. A property called `"_hash"` is added to the object and
+contains an int serving as a unique identifier for that object. This was done
+in lieu of implementing a full on hash function for objects, which is
+non-trivial and would most likely impact performance.
 
 Overview of Methods
 -------------------
@@ -53,6 +53,11 @@ another instance of `Set` or `Array`. Returns the set.
 
 Removes `value` from the set as-is. `value` is treated as-is and not iterated
 on. Remove fails silenty and always returns the set.
+
+### .pop()
+
+Removes and returns an arbitrary member from the set. If the set is empty,
+it will return `undefined`.
 
 ### .equals(other)
 
