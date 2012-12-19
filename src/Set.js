@@ -57,6 +57,17 @@
         return this;
     };
 
+    Set.prototype.pop = function() {
+        var i, value;
+        for (i in this._members) {
+            if (this._members.hasOwnProperty(i)) {
+                value = this._members[i];
+                this.remove(value);
+                return value;
+            }
+        }
+    };
+
     Set.prototype.clear = function() {
         this._members = {};
         this._length = 0;

@@ -91,6 +91,23 @@ describe('Set.prototype.remove(value)', function() {
     });
 });
 
+describe('Set.prototype.pop()', function() {
+    it('should remove and return a value from the set', function() {
+
+        var s1 = new Set([1, 2]);
+        var value = s1.pop();
+        expect(value).toBeGreaterThan(0);
+        expect(s1.length()).toBe(1)
+        value = s1.pop();
+        expect(value).toBeGreaterThan(0);
+        expect(s1.length()).toBe(0);
+        expect(s1.isEmpty()).toBe(true);
+        value = s1.pop();
+        expect(value).toBe(undefined);
+
+    });
+});
+
 describe('Set.prototype.equals(other)', function() {
     it('should return true if the set has the exact same members as other (any type)', function() {
 
