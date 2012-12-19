@@ -1,4 +1,4 @@
-(function(context, undefined) {
+(function(global, undefined) {
 
     'use strict';
 
@@ -227,6 +227,6 @@
         return 'Set([' + members.join(', ') + '])';
     };
 
-    context.Set = Set;
+    global.Set = Set;
 
-}(typeof window !== 'undefined' ? window : exports));
+}(this));
